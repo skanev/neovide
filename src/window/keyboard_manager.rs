@@ -177,7 +177,7 @@ impl KeyboardManager {
     }
 
     pub fn format_modifier_string(&self, use_shift: bool) -> String {
-        let shift = or_empty(self.shift && use_shift, "S-");
+        let shift = or_empty(self.shift && (use_shift || self.logo), "S-");
         let ctrl = or_empty(self.ctrl, "C-");
         let alt = or_empty(use_alt(self.alt), "M-");
         let logo = or_empty(self.logo, "D-");
