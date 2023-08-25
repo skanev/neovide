@@ -122,7 +122,8 @@ impl KeyboardManager {
         // It's also true with alt_is_meta is set to true.
         // When the key is not special, shift is removed, since the base character is already
         // shifted. Furthermore on macOS, meta is additionally removed when alt_is_meta is set to false
-        let shift = or_empty(self.modifiers.state().shift_key() && is_special, "S-");
+        let use_shift = is_special || self.modifiers.state().super_key();
+        let shift = or_empty(self.modifiers.state().shift_key() && use_shift, "S-");
         let ctrl = or_empty(self.modifiers.state().control_key(), "C-");
         let alt = or_empty(
             self.modifiers.state().alt_key() && (use_alt() || is_special),
